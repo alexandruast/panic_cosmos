@@ -232,10 +232,6 @@ class Node:
         # Alert (varies depending on whether was already missing blocks)
         if not self.is_missing_blocks:
             pass  # Do not alert on first missed block
-        elif 2 <= blocks_missed < danger:
-            channels.alert_info(MissedBlocksAlert(
-                self.name, blocks_missed, block_height, missing_validators)
-            )  # 2+ blocks missed inside danger range
         elif blocks_missed == 5:
             channels.alert_minor(MissedBlocksAlert(
                 self.name, blocks_missed, block_height, missing_validators)
