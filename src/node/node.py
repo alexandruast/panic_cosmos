@@ -236,7 +236,7 @@ class Node:
             channels.alert_minor(MissedBlocksAlert(
                 self.name, blocks_missed, block_height, missing_validators)
             )  # reached danger range
-        elif blocks_missed >= max(10, danger) and blocks_missed % 10 == 0:
+        elif blocks_missed >= max(25, danger) and blocks_missed % 25 == 0:
             channels.alert_major(MissedBlocksAlert(
                 self.name, blocks_missed, block_height, missing_validators)
             )  # Every (10N)th block missed for N >= 1 inside danger range
@@ -262,7 +262,7 @@ class Node:
             '%s clear_missed_blocks: channels=%s', self, channels)
 
         # Alert if validator was missing blocks (only if more than 1 block)
-        if self.is_missing_blocks and self._consecutive_blocks_missed > 1:
+        if self.is_missing_blocks and self._consecutive_blocks_missed > 5:
             channels.alert_info(NoLongerMissingBlocksAlert(
                 self.name, self._consecutive_blocks_missed))
 
